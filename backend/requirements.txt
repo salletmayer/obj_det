@@ -1,0 +1,6 @@
+uvicorn==0.24.0.post1
+opencv-python==4.9.0.80
+cvlib==0.2.7
+fastapi==0.108.0
+tensorflow==2.15
+python_multipart==0.0.6
