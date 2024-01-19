@@ -38,7 +38,7 @@ custom_dataset = CustomDataset(image_paths, targets)
 data_loader = DataLoader(custom_dataset, batch_size=batch_size, shuffle=True)
 
 
-## training
+## data something i don't even know
 import torch.optim as optim
 from backend.model import FRCNNObjectDetector
 
@@ -50,16 +50,22 @@ model = FRCNNObjectDetector(num_classes=len(info['classes']))
 criterion = torch.nn.CrossEntropyLoss()
 optimizer = optim.Adam(model.parameters(), lr=0.001)
 
-import numpy
-
 images = []
 targets = []
 for image, target in data_loader:
     target['boxes'] = target['boxes'][0]
+    target['labels'] = target['labels'][0]
     image = image[0]
 
     images.append(image)
     targets.append(target)
 
-outputs = model(images[:3], targets[:3])
-print(outputs)
+## training the model
+outputs = model(images[:2], targets[:2])
+
+model.eval()
+
+x = [torch.rand(3, 300, 400)]
+pred = model(x)
+
+print()
